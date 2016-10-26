@@ -72,6 +72,7 @@
   }
 
   Affix.prototype.checkPosition = function () {
+    if (!!this.options.disabled) return
     if (!this.$element.is(':visible')) return
 
     var height       = this.$element.height()
@@ -112,6 +113,17 @@
     }
   }
 
+  Affix.prototype.disable = function () {
+    this.options.disabled = true;
+    this.$element
+        .removeClass(Affix.RESET)
+  }
+
+  Affix.prototype.enable = function () {
+    this.options.disabled = false;
+    this.affixed = null;
+    this.checkPosition();
+  }
 
   // AFFIX PLUGIN DEFINITION
   // =======================
